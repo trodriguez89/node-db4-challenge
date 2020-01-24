@@ -5,7 +5,9 @@ module.exports = {
     getRecipeById,
     getShoppingList,
     getInstructions,
-    addRecipe
+    addRecipe,
+    addIngredients,
+    addSteps
 }
 
 function getRecipes() {
@@ -44,4 +46,14 @@ function addRecipe(newRecipe){
     .then(ids => {
         return getRecipeById(ids[0])
     })
+};
+
+function addIngredients(ingredients, id) {
+    return db("ingredients")
+    .insert({ name: ingredients.name, quantity: ingredients.quantity, recipes_id: id})
+};
+
+function addSteps(steps, id){
+    return db("steps")
+    .insert({ step_number: steps.step_number, instructions: steps.instructions, recipes_id: id })
 };
